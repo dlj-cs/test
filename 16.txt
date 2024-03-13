@@ -1,0 +1,1152 @@
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
+git安装：
+
+windows下安装Git
+下载git：https://git-scm.com/downloads
+参考：https://www.cnblogs.com/xueweisuoyong/p/11914045.html
+
+GitHub配置：(原文链接：https://blog.csdn.net/helunqu2017/article/details/120809943)
+
+(1)配置账户信息
+配置github 账户信息
+git config --global user.name "Your Name"
+git config --global user.email "youremail@xxx.com"
+
+查看配置信息
+git config --list
+git config user.name  #查看 user.name
+
+修改配置信息
+gedit ~/.gitconfig
+
+
+(2)配置 SSH key
+
+步骤1:检查shell是否可以连接GitHub 
+ssh -T git@github.com，如查看到以下信息，则说明可以连接。
+Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+步骤2:创建ssh key，若已有则跳过该步骤
+ssh-keygen -t rsa -C "youremail@xxx.com" -f ~/.ssh/github
+执行完成后，会在 ~/.ssh/目录下生成一个 github 和 github.pub 文件
+-t 指定密钥类型，默认是 rsa ，可以省略。
+-C 设置注释文字，比如邮箱。
+-f 指定密钥文件存储文件名。
+步骤3:github添加SSH key
+
+vi github.pub文件，得到key
+完成ssh后，注册邮箱会有邮件提示
+
+步骤4:验证添加SSH key成功否
+ssh -T git@github.com
+
+若出现Permission denied (publickey)报错，那是因为生成秘钥文件时对文件进行了重命名，然而你自定义的这个名字并没有和ssh内部规定的名字保持一致,解决方法如下：
+先执行：ssh-agent bash （一定要先执行这一步！）
+再执行：ssh-add ~/.ssh/xxx （xxx为你想要用的文件名，如本次为github）
+
+
+(3)上传文件到远程仓库：(原文链接：https://www.cnblogs.com/hdong/p/15720397.html)
+
+初始化本地仓库：git init
+连接远程仓库：git remote add kangch "https://github.com/kkkdc/kangch.git"
+连接成功后，查看状态：git remote -v
+将远程仓库的代码拉取到本地：git pull origin master
+建立一个本地文件并上传到远程仓库：
+①创建文本：touch x.txt
+②给文件添加内容：vim x.txt （编辑后按esc，输入:wq保存并退出）
+③将文件上传至暂缓区：git add x.txt
+④将文件提交至本地仓库：git commit -m "文件描述"
+⑤最后push到远程仓库：git push origin master
+
+
+
+git常用命令：https://blog.csdn.net/weixin_67585820/article/details/123554416
+
+
+
+gitlab
+
+若上传不成功error: failed to push some refs to 'http://192.168.30.197/kangch/test.git'
+解决办法
+方法一
+对于error: failed to push some refsto‘远程仓库地址’
+1 使用如下命令
+git pull --rebase origin master
+2 然后再进行上传:
+git push -u origin master
+
+
+
+gitlab修改服务器ip：（https://blog.csdn.net/u011775882/article/details/118308905）
+centos7的连接ip是192.168.6.129
+把localhost 换成本机的IP地址，修改方式如下：
+修改gitlab.yml文件：
+cd /opt/gitlab/embedded/service/gitlab-rails/config
+sudo vim gitlab.yml
+将127.0.0.1改成192.168.6.129
+sudo gitlab-ctl restart
+刷新浏览器就会变
+
+
+问题
+在提交代码或者拉取代码的时候，如果每次git都要输入用户名密码(https://blog.csdn.net/qq_24130227/article/details/124750036)
+解决方法
+终端输入:
+git config --global credential.helper store
+在git push /pull 的时候输入一次后，之后就不用在输账号和密码了
